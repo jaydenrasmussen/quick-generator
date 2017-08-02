@@ -1,0 +1,23 @@
+{
+  "name": "homeGenerator",
+  "version": "0.0.1",
+  "description": "A simple generator for Node apps",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha -R list"
+  },
+  "keywords": [],
+  "author": "J. Rasmussen",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "commander": "^2.11.0",
+    "fs-extra": "^4.0.1",
+    "prompt": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.5.0"
+  }
+}
