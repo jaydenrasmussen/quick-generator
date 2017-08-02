@@ -54,6 +54,7 @@ let config = {
         "test": "mocha -R list"
     },
     "dependencies": {
+        "async": "^2.5.0",
         "bluebird": "^3.5.0",
         "fs-extra": "^4.0.1"
     },
@@ -82,7 +83,7 @@ function createDirs(input) {
         fs.mkdirsSync(input.path + 'test/');
         fs.mkdirsSync(input.path + 'app/');
     }
-    fs.outputFileSync(input.path + 'app.js', 'init');
+    fs.outputFileSync(input.path + 'app.js', '// J. Rasmussen 2017');
     fs.outputFileSync(input.path + 'README.md', 'init');
     return;
 }
