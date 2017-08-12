@@ -1,5 +1,5 @@
 {
-  "name": "homeGenerator",
+  "name": "quick-generator",
   "version": "0.0.1",
   "description": "A simple generator for Node apps",
   "main": "index.js",
