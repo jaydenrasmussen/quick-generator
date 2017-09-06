@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "test": "ava"
+    "test": "ava",
+    "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\""
   },
   "keywords": [],
   "author": "J. Rasmussen",

@@ -41,24 +41,25 @@ let schema = {
             required: true
         }
     }
-}
+};
 let config = {
-    "main": "./app/app.js",
-    "bin": "./app/app.js",
-    "scripts": {
-        "start": "node app.js",
-        "test": "ava",
-        "test:watch": "ava --watch",
-        "format": "prettier --single-quote --tab-width 4 --print-width 80 --write '{,!(node_modules)/**/}*.js'"
+    main: './app/app.js',
+    bin: './app/app.js',
+    scripts: {
+        start: 'node app.js',
+        test: 'ava',
+        'test:watch': 'ava --watch',
+        format:
+            'prettier --single-quote --tab-width 4 --print-width 80 --write "{,!(node_modules)/**/}*.js"'
     },
-    "dependencies": {
-        "bluebird": "^3.5.0",
-        "fs-extra": "^4.0.1"
+    dependencies: {
+        bluebird: '^3.5.0',
+        'fs-extra': '^4.0.1'
     },
-    "devDependencies": {
-        "ava": "^0.22.0",
-        "rewire": "^2.5.2",
-        "sinon": "^3.2.1"
+    devDependencies: {
+        ava: '^0.22.0',
+        rewire: '^2.5.2',
+        sinon: '^3.2.1'
     }
 };
 let directory = process.cwd();
@@ -72,10 +73,10 @@ module.exports = Promise.resolve()
     .then(getInfo)
     .catch(console.log);
 function getInfo() {
-        return prompt.get(schema, (err, result) => {
-            createDirs(directory);
-            writeJSON(result, directory);
-        });
+    return prompt.get(schema, (err, result) => {
+        createDirs(directory);
+        writeJSON(result, directory);
+    });
 }
 function createDirs(input) {
     fs.ensureDirSync(input + '/test/');
@@ -87,9 +88,8 @@ function createDirs(input) {
 }
 function writeJSON(input, dir) {
     let tempObj = {};
-    if(input.electron === 'yes' ||
-       input.electron === 'y') {
-        config.dependencies['electron'] = "^1.6.11";
+    if (input.electron === 'yes' || input.electron === 'y') {
+        config.dependencies['electron'] = '^1.6.11';
     }
     for (let e in input) {
         if (e !== 'path' && e !== 'electron') {
@@ -97,7 +97,7 @@ function writeJSON(input, dir) {
         }
     }
     for (let e in config) {
-        tempObj[e] = config[e]; 
+        tempObj[e] = config[e];
     }
     fs.writeJsonSync(dir + '/package.json', tempObj);
     return;
