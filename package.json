@@ -2,14 +2,15 @@
   "name": "quick-generator",
   "version": "0.0.1",
   "description": "A simple generator for Node apps",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "mocha -R list"
+    "start": "node app",
+    "test": "ava"
   },
   "keywords": [],
   "author": "J. Rasmussen",
   "license": "MIT",
+  "bin": "app.js",
   "dependencies": {
     "bluebird": "^3.5.0",
     "commander": "^2.11.0",
@@ -17,6 +18,7 @@
     "prompt": "^1.0.0"
   },
   "devDependencies": {
+    "ava": "^0.22.0",
     "chai": "^4.1.0",
     "mocha": "^3.5.0"
   }

@@ -3,6 +3,7 @@
 var Promise = require('bluebird');
 const prompt = require('prompt');
 const fs = require('fs-extra');
+const path = require('path');
 let schema = {
     properties: {
         name: {
@@ -20,12 +21,6 @@ let schema = {
             description: 'What version is this?',
             type: 'string',
             required: false
-        },
-        path: {
-            default: './',
-            description: 'Where should it be installed? (begins at: ' + process.cwd() + ')',
-            type: 'string',
-            required: true
         },
         license: {
             default: 'MIT',
@@ -49,20 +44,25 @@ let schema = {
 }
 let config = {
     "main": "app.js",
+    "bin": "app.js",
     "scripts": {
         "start": "node app.js",
-        "test": "mocha -R list"
+        "test": "ava",
+        "test:watch": "ava --watch",
+        "format": "prettier --single-quote --tab-width 4 --print-width 80 --write '{,!(node_modules)/**/}*.js'"
     },
     "dependencies": {
-        "async": "^2.5.0",
         "bluebird": "^3.5.0",
         "fs-extra": "^4.0.1"
     },
     "devDependencies": {
-        "chai": "^4.1.0",
-        "mocha": "^3.5.0"
+        "ava": "^0.22.0",
+        "rewire": "^2.5.2",
+        "sinon": "^3.2.1"
     }
 };
+let directory = path.dirname(process.execPath);
+
 module.exports = Promise.resolve()
     .then(console.log('\n\tWelcome to the Generator!\n'))
     .then(() => {
@@ -72,35 +72,32 @@ module.exports = Promise.resolve()
     .then(getInfo)
     .catch(console.log);
 function getInfo() {
-        var test;
-        prompt.get(schema, (err, result) => {
-            createDirs(result);
-            writeJSON(result);
+        return prompt.get(schema, (err, result) => {
+            createDirs(directory);
+            writeJSON(result, directory);
         });
 }
 function createDirs(input) {
-    if(!fs.pathExistsSync(input.path)) {
-        fs.mkdirsSync(input.path + 'test/');
-        fs.mkdirsSync(input.path + 'app/');
-    }
-    fs.outputFileSync(input.path + 'app.js', '// J. Rasmussen 2017');
-    fs.outputFileSync(input.path + 'README.md', 'init');
+    fs.ensureDirSync(input + '/test/');
+    fs.ensureDirSync(input + '/app/');
+    fs.outputFileSync(input + '/app.js', '// J. Rasmussen 2017');
+    fs.outputFileSync(input + '/README.md', 'init');
     return;
 }
-function writeJSON(input) {
-    var tempObj = {};
+function writeJSON(input, dir) {
+    let tempObj = {};
     if(input.electron === 'yes' ||
        input.electron === 'y') {
         config.dependencies['electron'] = "^1.6.11";
     }
-    for (var e in input) {
+    for (let e in input) {
         if (e !== 'path' && e !== 'electron') {
             tempObj[e] = input[e];
         }
     }
-    for (var e in config) {
+    for (let e in config) {
         tempObj[e] = config[e]; 
     }
-    fs.writeJsonSync(input.path + 'package.json', tempObj);
+    fs.writeJsonSync(dir + '/package.json', tempObj);
     return;
 }
