@@ -43,8 +43,8 @@ let schema = {
     }
 }
 let config = {
-    "main": "app.js",
-    "bin": "app.js",
+    "main": "./app/app.js",
+    "bin": "./app/app.js",
     "scripts": {
         "start": "node app.js",
         "test": "ava",
@@ -80,7 +80,8 @@ function getInfo() {
 function createDirs(input) {
     fs.ensureDirSync(input + '/test/');
     fs.ensureDirSync(input + '/app/');
-    fs.outputFileSync(input + '/app.js', '// J. Rasmussen 2017');
+    fs.outputFileSync(input + '/app/app.js', '// J. Rasmussen 2017');
+    fs.outputFileSync(input + '/test/app.test.js', '// J. Rasmussen 2017');
     fs.outputFileSync(input + '/README.md', 'init');
     return;
 }
