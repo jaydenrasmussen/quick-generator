@@ -61,7 +61,7 @@ let config = {
         "sinon": "^3.2.1"
     }
 };
-let directory = path.dirname(process.execPath);
+let directory = process.cwd();
 
 module.exports = Promise.resolve()
     .then(console.log('\n\tWelcome to the Generator!\n'))
