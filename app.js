@@ -83,7 +83,7 @@ function writeJSON() {
     fs.writeJsonSync(base + 'package.json', config);
     fs.outputFileSync(base + 'app/app.js', '// J. Rasmussen 2017');
     fs.outputFileSync(base + 'test/app.test.js', '// J. Rasmussen 2017');
-    fs.outputFileSync(base + 'README.md', '#init');
+    fs.outputFileSync(base + 'README.md', '# init');
     fs.outputFileSync(base + '.editorconfig', editorconfig);
     fs.outputFileSync(base + '.gitignore', 'node_modules');
 }
