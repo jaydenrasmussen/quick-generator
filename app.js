@@ -11,7 +11,8 @@ insert_final_newline = true
 [*.js]
 charset = utf-8
 indent_style = spaces
-indent_size = 4`;
+indent_size = 4
+trim_trailing_whitespace:true`;
 let base = process.cwd() + '/';
 let config = {};
 
@@ -64,7 +65,7 @@ function addDefaults() {
         test: 'ava',
         'test:watch': 'ava --watch',
         format:
-            'prettier --single-quote --tab-width 4 --print-width 80 --write "{,!(node_modules)/**/}*.js"'
+            'prettier --single-quote --tab-width 4 --print-width 120 --write "{,!(node_modules)/**/}*.js"'
     };
     config['dependencies'] = {
         bluebird: '^3.5.0',
