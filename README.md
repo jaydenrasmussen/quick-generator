@@ -1,6 +1,6 @@
 # Quick-Generator
 
-A <u>decently</u> fast way to generate a node project
+A *decently* fast way to generate a node project
 
 ### Usage
 
