@@ -1,104 +1,90 @@
 // J. Rasmussen 2017
 // Main generator for node apps
 var Promise = require('bluebird');
-const prompt = require('prompt');
 const fs = require('fs-extra');
-const path = require('path');
-let schema = {
-    properties: {
-        name: {
-            description: 'What should we call it?',
-            required: true,
-            type: 'string'
-        },
-        author: {
-            description: 'Who is the author?',
-            required: true,
-            type: 'string'
-        },
-        version: {
-            default: '0.0.1',
-            description: 'What version is this?',
-            type: 'string',
-            required: false
-        },
-        license: {
-            default: 'MIT',
-            description: 'Use another license? (default MIT)',
-            type: 'string',
-            required: false
-        },
-        description: {
-            default: '',
-            required: false,
-            description: 'What are you building?',
-            type: 'string'
-        },
-        electron: {
-            default: 'no',
-            pattern: /^(yes|no|y|n)$/gi,
-            description: 'Should I include electron?',
-            required: true
-        }
+const program = require('commander');
+
+let editorconfig = `root = true
+[*]
+end_of_line = lf
+insert_final_newline = true
+[*.js]
+charset = utf-8
+indent_style = spaces
+indent_size = 4`;
+let base = process.cwd() + '/';
+let config = {};
+
+program
+    .version('0.2.0')
+    .command('init [options]')
+    .option('-n --name [appName]', 'name of the project', addName)
+    .option('-v --version [appVersion]', 'version of the project', addVersion)
+    .option('-l --license [license]', 'license for the project', addLicense)
+    .option('-e --electron', 'init with electron', addElectron)
+    .action(() => {
+        addDefaults();
+        createDirs();
+        writeJSON();
+        process.exit(0);
+    });
+function addName(val) {
+    return (config['name'] = val);
+}
+function addVersion(val) {
+    return (config['version'] = val);
+}
+function addLicense(val) {
+    return (config['license'] = val);
+}
+function addElectron(val) {
+    return (config.dependencies['electron'] = '^1.7.6');
+}
+function addDefaults() {
+    if (program.appName) {
+        config['name'] = program.appName;
+    } else {
+        config['name'] = 'default';
     }
-};
-let config = {
-    main: './app/app.js',
-    bin: './app/app.js',
-    scripts: {
-        start: 'node app.js',
+    if (program.appVersion) {
+        config['version'] = program.appVersion;
+    } else {
+        config['version'] = '0.0.1';
+    }
+    if (program.license) {
+        config['license'] = program.license;
+    } else {
+        config['license'] = 'MIT';
+    }
+    config['main'] = './app/app.js';
+    config['bin'] = './app/app.js';
+    config['scripts'] = {
+        start: 'node ./app/app.js',
         test: 'ava',
         'test:watch': 'ava --watch',
         format:
             'prettier --single-quote --tab-width 4 --print-width 80 --write "{,!(node_modules)/**/}*.js"'
-    },
-    dependencies: {
+    };
+    config['dependencies'] = {
         bluebird: '^3.5.0',
         'fs-extra': '^4.0.1'
-    },
-    devDependencies: {
+    };
+    config['devDependencies'] = {
         ava: '^0.22.0',
         rewire: '^2.5.2',
         sinon: '^3.2.1'
-    }
-};
-let directory = process.cwd();
-
-module.exports = Promise.resolve()
-    .then(console.log('\n\tWelcome to the Generator!\n'))
-    .then(() => {
-        prompt.message = '';
-        prompt.start();
-    })
-    .then(getInfo)
-    .catch(console.log);
-function getInfo() {
-    return prompt.get(schema, (err, result) => {
-        createDirs(directory);
-        writeJSON(result, directory);
-    });
+    };
 }
-function createDirs(input) {
-    fs.ensureDirSync(input + '/test/');
-    fs.ensureDirSync(input + '/app/');
-    fs.outputFileSync(input + '/app/app.js', '// J. Rasmussen 2017');
-    fs.outputFileSync(input + '/test/app.test.js', '// J. Rasmussen 2017');
-    fs.outputFileSync(input + '/README.md', 'init');
-    return;
+function createDirs() {
+    fs.ensureDirSync(base + 'app/');
+    fs.ensureDirSync(base + 'test/');
 }
-function writeJSON(input, dir) {
-    let tempObj = {};
-    if (input.electron === 'yes' || input.electron === 'y') {
-        config.dependencies['electron'] = '^1.6.11';
-    }
-    for (let e in input) {
-        if (e !== 'path' && e !== 'electron') {
-            tempObj[e] = input[e];
-        }
-    }
-    for (let e in config) {
-        tempObj[e] = config[e];
-    }
-    fs.writeJsonSync(dir + '/package.json', tempObj);
-    return;
+function writeJSON() {
+    fs.writeJsonSync(base + 'package.json', config);
+    fs.outputFileSync(base + 'app/app.js', '// J. Rasmussen 2017');
+    fs.outputFileSync(base + 'test/app.test.js', '// J. Rasmussen 2017');
+    fs.outputFileSync(base + 'README.md', '#init');
+    fs.outputFileSync(base + '.editorconfig', editorconfig);
+    fs.outputFileSync(base + '.gitignore', 'node_modules');
 }
+program.parse(process.argv);

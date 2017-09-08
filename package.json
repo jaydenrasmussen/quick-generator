@@ -1,26 +1,25 @@
 {
   "name": "quick-generator",
-  "version": "0.0.1",
-  "description": "A simple generator for Node apps",
+  "author": "J. Rasmussen",
+  "version": "0.2.0",
+  "license": "MIT",
+  "description": "A quick generator for node apps",
   "main": "app.js",
+  "bin": "app.js",
   "scripts": {
-    "start": "node app",
+    "start": "node ./app/app.js",
     "test": "ava",
+    "test:watch": "ava --watch",
     "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\""
   },
-  "keywords": [],
-  "author": "J. Rasmussen",
-  "license": "MIT",
-  "bin": "app.js",
   "dependencies": {
     "bluebird": "^3.5.0",
     "commander": "^2.11.0",
-    "fs-extra": "^4.0.1",
-    "prompt": "^1.0.0"
+    "fs-extra": "^4.0.1"
   },
   "devDependencies": {
     "ava": "^0.22.0",
-    "chai": "^4.1.0",
-    "mocha": "^3.5.0"
+    "rewire": "^2.5.2",
+    "sinon": "^3.2.1"
   }
 }
