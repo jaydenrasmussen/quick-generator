@@ -19,6 +19,7 @@ program
     .version('0.2.0')
     .command('init [options]')
     .option('-n --name [appName]', 'name of the project', addName)
+    .option('-a --author [appAuthor]', 'author of the project', addAuthor)
     .option('-v --version [appVersion]', 'version of the project', addVersion)
     .option('-l --license [license]', 'license for the project', addLicense)
     .option('-e --electron', 'init with electron', addElectron)
@@ -31,6 +32,9 @@ program
 function addName(val) {
     return (config['name'] = val);
 }
+function addAuthor(val) {
+    return (config['author'] = val);
+}
 function addVersion(val) {
     return (config['version'] = val);
 }
@@ -42,18 +46,15 @@ function addElectron(val) {
 }
 function addDefaults() {
     if (program.appName) {
-        config['name'] = program.appName;
-    } else {
         config['name'] = 'default';
     }
-    if (program.appVersion) {
-        config['version'] = program.appVersion;
-    } else {
+    if (!program.appAuthor) {
+        config['author'] = 'anonymous';
+    }
+    if (!program.appVersion) {
         config['version'] = '0.0.1';
     }
-    if (program.license) {
-        config['license'] = program.license;
-    } else {
+    if (!program.license) {
         config['license'] = 'MIT';
     }
     config['main'] = './app/app.js';
