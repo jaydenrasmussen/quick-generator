@@ -30,6 +30,7 @@ program
         writeJSON();
         process.exit(0);
     });
+    
 function addName(val) {
     return (config['name'] = val);
 }
