@@ -10,7 +10,7 @@
     "start": "node ./app/app.js",
     "test": "ava",
     "test:watch": "ava --watch",
-    "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\""
+    "format": "prettier --single-quote --tab-width 4 --print-width 120 --write \"{,!(node_modules)/**/}*.js\""
   },
   "dependencies": {
     "bluebird": "^3.5.0",
