@@ -11,4 +11,4 @@ A *decently* fast way to generate a node project
 - Use `-v` or `--version` flag to define the version of the project
 - Use the `-a` or `--author` flag to define the author of the project
 - Use the `-e` or  `--electron` flag to include electron in the project
-
+- Use the `-x` or `--express` flag to include express in the project
