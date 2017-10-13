@@ -20,16 +20,22 @@ Permission to use, copy, modify, and/or distribute this software for any purpose
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 `;
 let base = process.cwd() + '/';
-let config = {};
+let config = {
+    name: 'default',
+    dependencies: {
+
+    }
+};
 
 program
-    .version('0.2.0')
+    .version('0.3.0')
     .command('init [options]')
     .option('-n --name [appName]', 'name of the project', addName)
     .option('-a --author [appAuthor]', 'author of the project', addAuthor)
     .option('-v --version [appVersion]', 'version of the project', addVersion)
     .option('-l --license [license]', 'license for the project', addLicense)
     .option('-e --electron', 'init with electron', addElectron)
+    .option('-x --express', 'init with express', addExpress)
     .action(() => {
         addDefaults();
         createDirs();
@@ -50,12 +56,12 @@ function addLicense(val) {
     return (config['license'] = val);
 }
 function addElectron(val) {
-    return (config.dependencies['electron'] = '^1.7.6');
+    return (config['dependencies']['electron'] = '^1.7.6');
+}
+function addExpress(val) {
+    return (config['dependencies']['express'] = '4.16.2');
 }
 function addDefaults() {
-    if (program.appName) {
-        config['name'] = 'default';
-    }
     if (!program.appAuthor) {
         config['author'] = 'anonymous';
     }
@@ -73,10 +79,10 @@ function addDefaults() {
         'test:watch': 'ava --watch',
         format: 'prettier --single-quote --tab-width 4 --print-width 120 --write "{,!(node_modules)/**/}*.js"'
     };
-    config['dependencies'] = {
-        bluebird: '^3.5.0',
-        'fs-extra': '^4.0.1'
-    };
+
+    config['dependencies']['bluebird'] = '^3.5.0';
+    config['dependencies']['fs-extra'] = '^4.0.1';
+
     config['devDependencies'] = {
         ava: '^0.22.0',
         rewire: '^2.5.2',
@@ -86,14 +92,24 @@ function addDefaults() {
 function createDirs() {
     fs.ensureDirSync(base + 'app/');
     fs.ensureDirSync(base + 'test/');
+    if (config.dependencies['express']) {
+        fs.ensureDirSync(base + 'routes/');
+        fs.ensureDirSync(base + 'controllers/');
+        fs.ensureDirSync(base + 'services/');
+    }
 }
 function writeJSON() {
     fs.writeJsonSync(base + 'package.json', config);
     fs.outputFileSync(base + 'app/app.js', '// J. Rasmussen 2017');
     fs.outputFileSync(base + 'test/app.test.js', '// J. Rasmussen 2017');
     fs.outputFileSync(base + 'README.md', '# init');
-    fs.outputFileSync(base + 'license.md', licenseVar);
+    fs.outputFileSync(base + 'LICENSE.md', licenseVar);
     fs.outputFileSync(base + '.editorconfig', editorconfig);
     fs.outputFileSync(base + '.gitignore', 'node_modules');
+    if (config.dependencies['express']) {
+        fs.outputFileSync(base + 'routes/app.route.js', '// J. Ramussen 2017');
+        fs.outputFileSync(base + 'controllers/app.controller.js', '// J. Ramussen 2017');
+        fs.outputFileSync(base + 'services/app.service.js', '// J. Ramussen 2017');
+    }
 }
 program.parse(process.argv);
