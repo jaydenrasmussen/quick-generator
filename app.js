@@ -12,7 +12,7 @@ insert_final_newline = true
 charset = utf-8
 indent_style = spaces
 indent_size = 4
-trim_trailing_whitespace:true`;
+trim_trailing_whitespace = true`;
 let licenseVar = `Copyright 2017 ${program.appAuthor}
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -77,7 +77,7 @@ function addDefaults() {
         start: 'node ./app/app.js',
         test: 'ava',
         'test:watch': 'ava --watch',
-        format: 'prettier --single-quote --tab-width 4 --print-width 120 --write "{,!(node_modules)/**/}*.js"'
+        format: 'prettier --single-quote --tab-width 4 --print-width 80 --write "{,!(node_modules)/**/}*.js"'
     };
 
     config['dependencies']['bluebird'] = '^3.5.0';
