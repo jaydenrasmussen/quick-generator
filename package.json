@@ -10,16 +10,14 @@
     "start": "node ./app/app.js",
     "test": "ava",
     "test:watch": "ava --watch",
-    "format": "prettier --single-quote --tab-width 4 --print-width 120 --write \"{,!(node_modules)/**/}*.js\""
+    "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\""
   },
   "dependencies": {
-    "bluebird": "^3.5.0",
     "commander": "^2.11.0",
-    "fs-extra": "^4.0.1"
+    "execa": "^0.8.0",
+    "fs-extra": "^4.0.2"
   },
   "devDependencies": {
-    "ava": "^0.22.0",
-    "rewire": "^2.5.2",
-    "sinon": "^3.2.1"
+    "ava": "^0.22.0"
   }
 }
