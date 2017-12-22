@@ -4,20 +4,27 @@
   "version": "0.3.0",
   "license": "MIT",
   "description": "A quick generator for node apps",
-  "main": "app.js",
-  "bin": "app.js",
+  "main": "app/app.js",
+  "bin": "app/app.js",
+  "pkg": {
+    "assets": "app/**/*"
+  },
   "scripts": {
     "start": "node ./app/app.js",
     "test": "ava",
-    "test:watch": "ava --watch",
+    "build": "pkg .",
+    "build:win": "pkg . -t node8-win-x64",
+    "build:lin": "pkg . -t node8-linux-x64",
+    "build:mac": "pkg . -t node8-macos-x64",
     "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\""
   },
   "dependencies": {
-    "commander": "^2.11.0",
+    "commander": "^2.12.2",
     "execa": "^0.8.0",
     "fs-extra": "^4.0.2"
   },
   "devDependencies": {
-    "ava": "^0.22.0"
+    "ava": "^0.22.0",
+    "prettier": "^1.9.2"
   }
 }
