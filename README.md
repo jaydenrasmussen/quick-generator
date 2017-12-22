@@ -33,3 +33,4 @@ I've also added support for yarn, so the app will now see check to see that you 
 - `express` creats an express project and initializes it
 - `micro` creates a micro project (zeit/micro) and initializes it
 - `go` creates a go project
+- `init` creates a blank folder with just a `README.md` and `LICENSE.md`
