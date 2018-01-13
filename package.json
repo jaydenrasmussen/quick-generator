@@ -19,9 +19,11 @@
     "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\""
   },
   "dependencies": {
+    "chalk": "^2.3.0",
     "commander": "^2.12.2",
     "execa": "^0.8.0",
-    "fs-extra": "^4.0.2"
+    "fs-extra": "^4.0.2",
+    "moment": "^2.20.1"
   },
   "devDependencies": {
     "ava": "^0.22.0",
