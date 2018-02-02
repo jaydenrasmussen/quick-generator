@@ -1,0 +1,1 @@
+'use strict';const fs=require('fs');module.exports=app=>{let o=r();Object.keys(o).map(x=>o[x](app));};function r(){let c=fs.readdirSync('./routes');let j={};for(let i=0;i<c.length;i++){if(c[i]!=='index.js'){let k=c[i];k=k.substr(6);k=k.slice(0,-3);j[k]=require(`./${c[i]}`);}}return j;}
