@@ -7,5 +7,4 @@ module.exports = {
     node: require('../utils/util.node'),
     pm: require('../utils/util.pm'),
     repo: require('../utils/util.repo')
-}
-
+};

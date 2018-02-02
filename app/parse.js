@@ -12,35 +12,67 @@ module.exports = async cli => {
     switch (command) {
         case 'e':
         case 'electron':
-            await util.node.electron(project);
+            await util.node
+                .electron(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         case 'g':
         case 'go':
-            await util.go(project);
+            await util
+                .go(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         case 'i':
         case 'init':
-            await util.default(project);
+            await util
+                .default(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         case 'n':
         case 'node':
-            await util.node.node(project);
+            await util.node
+                .node(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         case 'm':
         case 'micro':
-            await util.node.micro(project);
+            await util.node
+                .micro(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         case 'p':
         case 'polka':
-            await util.node.polka(project);
+            await util.node
+                .polka(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         case 'x':
         case 'express':
-            await util.node.express(project);
+            await util.node
+                .express(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         case 'm':
         case 'micro':
-            await util.node.micro(project);
+            await util.node
+                .micro(project)
+                .then(() =>
+                    util.log.success(`Successfully created ${project}`)
+                );
             break;
         default:
             util.log.error(`${command} is not a valid command`);
@@ -49,5 +81,4 @@ module.exports = async cli => {
     if ((cli.flags.repo || cli.flags.r) && cli.input[0] && cli.input[1]) {
         await util.repo(project);
     }
-    util.log.success(`Successfully created ${project}`);
 };

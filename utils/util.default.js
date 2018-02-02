@@ -26,5 +26,8 @@ charset = utf-8
 indent_style = spaces
 indent_size = 4
 trim_trailing_whitespace = true`;
-    await fs.outputFile(`${process.cwd()}/${project}/.editorconfig`, editorFile);
+    await fs.outputFile(
+        `${process.cwd()}/${project}/.editorconfig`,
+        editorFile
+    );
 }

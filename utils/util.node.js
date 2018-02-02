@@ -23,10 +23,13 @@ async function pkg(project) {
                 'prettier --single-quote --tab-width 4 --print-width 80 --write "{,!(node_modules)/**/}*.js"'
         }
     };
-    await fs.outputJson(`${process.cwd()}/${project}/package.json`, packageJson);
+    await fs.outputJson(
+        `${process.cwd()}/${project}/package.json`,
+        packageJson
+    );
 }
 async function electron(project) {
-	await node(project);
+    await node(project);
     let yarnExists = await pm.yarn.exists();
     if (yarnExists) {
         await pm.yarn.add(project, 'electron');
@@ -37,14 +40,16 @@ async function electron(project) {
 async function node(project) {
     await mainDir(project);
     await appDir(project);
-    await Promise.all([appJs(project), def(project), pkg(project), testDir(project)]);
+    await Promise.all([
+        appJs(project),
+        def(project),
+        pkg(project),
+        testDir(project)
+    ]);
 }
 async function micro(project) {
-	await node(project);
-	await Promise.all([
-		routesDir(project),
-		controllersDir(project)
-	])
+    await node(project);
+    await Promise.all([routesDir(project), controllersDir(project)]);
     let yarnExists = await pm.yarn.exists();
     if (yarnExists) {
         await pm.yarn.add(project, 'micro');
@@ -53,11 +58,8 @@ async function micro(project) {
     }
 }
 async function polka(project) {
-	await node(project);
-	await Promise.all([
-		routesDir(project),
-		controllersDir(project)
-	])
+    await node(project);
+    await Promise.all([routesDir(project), controllersDir(project)]);
     let yarnExists = await pm.yarn.exists();
     if (yarnExists) {
         await pm.yarn.add(project, 'polka');
@@ -66,11 +68,8 @@ async function polka(project) {
     }
 }
 async function express(project) {
-	await node(project);
-	await Promise.all([
-		routesDir(project),
-		controllersDir(project)
-	])
+    await node(project);
+    await Promise.all([routesDir(project), controllersDir(project)]);
     let yarnExists = await pm.yarn.exists();
     if (yarnExists) {
         await pm.yarn.add(project, 'express');
@@ -95,5 +94,8 @@ async function mainDir(project) {
     await fs.ensureDir(`${process.cwd()}/${project}`);
 }
 async function appJs(project) {
-    await fs.outputFile(`${process.cwd()}/${project}/app/app.js`, `'use strict';`);
+    await fs.outputFile(
+        `${process.cwd()}/${project}/app/app.js`,
+        `'use strict';`
+    );
 }
