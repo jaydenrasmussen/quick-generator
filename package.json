@@ -12,11 +12,11 @@
   "scripts": {
     "start": "node ./app/app.js",
     "test": "ava",
+    "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\"",
     "build": "pkg .",
     "build:win": "pkg . -t node8-win-x64",
     "build:lin": "pkg . -t node8-linux-x64",
-    "build:mac": "pkg . -t node8-macos-x64",
-    "format": "prettier --single-quote --tab-width 4 --print-width 80 --write \"{,!(node_modules)/**/}*.js\""
+    "build:mac": "pkg . -t node8-macos-x64"
   },
   "dependencies": {
     "chalk": "^2.3.0",

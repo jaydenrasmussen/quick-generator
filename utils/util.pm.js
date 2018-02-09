@@ -9,7 +9,6 @@ module.exports = {
         add: yarnAdd
     },
     npm: {
-        exists: npmExists,
         add: npmAdd
     }
 };
@@ -21,10 +20,6 @@ async function yarnAdd(project, pkg) {
     execa
         .shell(`cd ${project} && yarn add ${pkg}`)
         .catch(err => console.log(err));
-}
-async function npmExists() {
-    let bool = execa.shell('npm').catch(err => false);
-    return bool ? true : false;
 }
 async function npmAdd(project, pkg) {
     execa
