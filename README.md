@@ -18,7 +18,7 @@ I've also added support for yarn, so the app will now see check to see that you 
 
 ##### flags
 
-- -r - initializes the new directory as a repo
+- <r> - initializes the new directory as a repo
 
 ##### commands
 
