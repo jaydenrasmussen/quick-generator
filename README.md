@@ -1,6 +1,6 @@
 # Quick-Generator
 
-Woohoo! Version 2.0 is here!
+Woohoo! Version 3.0 is here!
 
 A *decently* fast way to generate a node project
 
@@ -16,21 +16,18 @@ I've also added support for yarn, so the app will now see check to see that you 
 
 `qg <command> [options] [project]`
 
+##### flags
 
+- `-r` - initializes the new directory as a repo
 
 ##### commands
 
-`qg repo` creates a git repo at the specified directory, and with the options specified
+- electron `e` - generates an electron app
+- go `g` - generates a go app
+- init `i` - generates a project directory
+- node `n` - generates a node app
+- micro `m` - generates micro app
+- polka `p` - generates polka app
+- express `e` - generates an express app
+- micro `m` - generates a zeit/micro app
 
-`qg init` creates just the directory with the options specified
-
-
-
-##### options
-
-- `node` creates a node project and initializes it
-- `electron` creates an electron project and initializes it
-- `express` creats an express project and initializes it
-- `micro` creates a micro project (zeit/micro) and initializes it
-- `go` creates a go project
-- `init` creates a blank folder with just a `README.md` and `LICENSE.md`
