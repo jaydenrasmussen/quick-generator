@@ -13,7 +13,7 @@ module.exports = {
     }
 };
 async function yarnExists() {
-    let bool = execa.shell('yarn').catch(err => false);
+    let bool = await execa.shell('yarn').catch(err => false);
     return bool ? true : false;
 }
 async function yarnAdd(project, pkg) {

@@ -4,7 +4,7 @@ const parse = require('./parse');
 module.exports = (async () => {
     const cli = meow(
         `Usage: qg [command] <flag> [project name]
-Commands: electron <e> - generates an electron app 
+Commands: electron <e> - generates an electron app
           go <g> - generates a go app
           init <i> - generates a project directory
           node <n> - generates a node app
@@ -12,7 +12,7 @@ Commands: electron <e> - generates an electron app
           polka <p> - generates polka app
           express <e> - generates an express app
           micro <m> - generates a zeit/micro app
-Flags: repo <r> 
+Flags: repo <r>
 
 Examples: qg n -r sweet-tea`,
         {
