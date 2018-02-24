@@ -1,7 +1,7 @@
 {
   "name": "quick-generator",
   "author": "J. Rasmussen",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "MIT",
   "description": "A quick generator for node apps",
   "main": "app/app.js",

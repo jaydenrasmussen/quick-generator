@@ -79,7 +79,6 @@ async function express(project) {
 }
 async function routesDir(project) {
     await fs.ensureDir(`${process.cwd()}/${project}/routes`);
-    await fs.copy('./app/index', `${process.cwd()}/${project}/routes/index.js`);
 }
 async function controllersDir(project) {
     await fs.ensureDir(`${process.cwd()}/${project}/controllers`);
